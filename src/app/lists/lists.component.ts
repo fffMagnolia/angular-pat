@@ -1,5 +1,5 @@
 /* General */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 /* Service */
 import { ListsApiService } from '../services/apis/lists-api.service';
@@ -9,7 +9,6 @@ import { ListService } from '../services/list.service';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { ListTitleEditorComponent } from '../list-title-editor/list-title-editor.component';
 
-//応急処置。本当はmodelをangular側で作った方が良い？
 interface itemsJSON {
   id: number;
   body: string;
@@ -36,13 +35,13 @@ export class ListsComponent implements OnInit {
   lists: listsJSON;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private listsApiService: ListsApiService,
     private listService: ListService,
     private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
-    //HttpClient.get()がObservableを返すため、subscribeを呼び出せる
     this.listsApiService.getLists().subscribe(res => {
       this.lists = <listsJSON>res;
     })
@@ -50,12 +49,24 @@ export class ListsComponent implements OnInit {
 
   /*
    * ListのTitle編集画面を表示
-   * inputに表示させるため現在のtitleをserviceに渡す
+   * @nowTitle: 現在のタイトル。inputのplaceholderに表示
+   * @id: update対象のリストID。updateに使用
   */
   openListTitleEditor(list) {
     let nowTitle = list.title;
-    this.listService.setTitle(nowTitle);
+    let id = list.id;
 
-    this.bottomSheet.open(ListTitleEditorComponent);
+    this.listService.setTitle(nowTitle);
+    this.listService.setId(id);
+
+    let listTitleEditor = this.bottomSheet.open(ListTitleEditorComponent);
+
+    //lists更新後、viewを強制的に再描画する
+    listTitleEditor.afterDismissed().subscribe( _ => {
+      this.listsApiService.getLists().subscribe(res => {
+        this.lists = <listsJSON>res;
+      })
+      this.changeDetectorRef.detectChanges();
+    });
   }
 }

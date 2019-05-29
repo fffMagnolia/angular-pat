@@ -1,7 +1,6 @@
 <form>
   <mat-form-field>
-    <!-- clickされたListのTitleにPlaceholderを変更したい -->
-    <input matInput placeholder="{{ nowTitle }}" />
+    <input matInput placeholder="{{ nowTitle }}" [(ngModel)]="newTitle" name="newTitle"/>
   </mat-form-field>
-  <button mat-stroked-button style="margin-left: 10px;">Submit</button>
+  <button mat-stroked-button id="title-submit-button" (click)="updateTitle($event)">Submit</button>
 </form>

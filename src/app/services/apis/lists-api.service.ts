@@ -14,15 +14,15 @@ export class ListsApiService {
 
   constructor(private http: HttpClient) { }
 
+  /* 一覧を返す */
   getLists() {
     return this.http.get('/lists');
   }
 
-  //idを元にstateを反転させる(=データ更新)
-  //put(endpoint-url, 渡したい値, httpOptions)
-  /*
-  setItemState(number: id): Observable {
-    return this.http.put('/list', id, httpOptions);
+  /* 指定されたListのtitleをupdate*/
+  updateListTitle(id: number, title: string) {
+    let url = `/lists/${id}`;
+    let jsonTitle = `{ "title": "${title}" }`;
+    return this.http.put(url, JSON.parse(jsonTitle), httpOptions);
   }
-  */
 }

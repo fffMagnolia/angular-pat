@@ -1,15 +1,17 @@
+/* General */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+/* Component */
 import { AppComponent } from './app.component';
 import { ListsComponent } from './lists/lists.component';
 import { ListTitleEditorComponent } from './list-title-editor/list-title-editor.component';
 
-import { HttpClientModule } from '@angular/common/http';
+/* UI Library */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-//UI module
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
@@ -17,7 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-//Angular Flex
+/* Angular Flex */
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -37,7 +39,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatBottomSheetModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule
   ],
   entryComponents: [ListTitleEditorComponent],
   providers: [],
