@@ -49,9 +49,11 @@ export class ListTitleEditorComponent implements OnInit {
   */
   updateTitle(event) {
     //バック側に飛ばす。view更新用にserviceにも新しいタイトルを渡す
-    this.listsApiService.updateListTitle(this.id, this.newTitle);
-    //後処理。dismiss後listsに処理を引き継ぐ。
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
+    this.listsApiService.updateListTitle(this.id, this.newTitle)
+      .subscribe( _ => {
+        //後処理。dismiss後listsに処理を引き継ぐ。
+        this.bottomSheetRef.dismiss();
+        event.preventDefault();
+      });
   }
 }

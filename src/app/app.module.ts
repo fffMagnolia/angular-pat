@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ListsComponent } from './lists/lists.component';
 import { ListTitleEditorComponent } from './list-title-editor/list-title-editor.component';
+import { DeleteConfimationDialogComponent } from './delete-confimation-dialog/delete-confimation-dialog.component';
 
 /* UI Library */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +19,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 /* Angular Flex */
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -26,7 +28,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     AppComponent,
     ListsComponent,
-    ListTitleEditorComponent
+    ListTitleEditorComponent,
+    DeleteConfimationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +43,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
-  entryComponents: [ListTitleEditorComponent],
+  entryComponents: [ListTitleEditorComponent, DeleteConfimationDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

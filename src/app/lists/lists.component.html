@@ -1,8 +1,17 @@
 <div fxLayout="row wrap" fxLayoutAlign="center">
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="New List" name="newList" (keydown.enter)="addList($event)"/>
+    </mat-form-field>
+  </form>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="center">
   <div *ngFor="let list of lists">
   <mat-card class="card">
     <mat-card-header>
-      <mat-card-title id="mat-card-title" (click)="openListTitleEditor(list)">{{ list['title'] }}</mat-card-title>
+      <mat-card-title id="mat-card-title">
+        <div (click)="openListTitleEditor(list)">{{ list['title'] }}</div>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-selection-list role="list" (selectionChange)="editItemBody($event.option)">
@@ -10,17 +19,24 @@
           <!-- load直後はstateの状態によってDOMが変わる -->
           <!-- selectedの値が変わる毎にstateも変更したい -->
           <div [ngSwitch]="item['state']">
-            <!-- TODOが未完了の場合 -->
-            <mat-list-option role="listitem" *ngSwitchCase="0" [selected]="item.selected" [value]="item['id']">
-              {{ item['body'] }}
-            </mat-list-option>
-            <!-- TODOが完了の場合 -->
-            <mat-list-option role="listitem" *ngSwitchCase="1" [selected]="item.selected" [value]="item['id']">
-              <s>{{ item['body'] }}</s>
+            <mat-list-option role="listitem" [selected]="item.selected" [value]="item['id']">
+              <!-- TODOが未完了の場合 -->
+              <div *ngSwitchCase="0">{{ item['body'] }}</div>
+              <!-- TODOが完了の場合 -->
+              <div *ngSwitchCase="1"><s>{{ item['body'] }}</s></div>
             </mat-list-option>
           </div>
         </div>
       </mat-selection-list>
+      <button mat-button (click)="openConfimationDialog(list['id'], list['title'])" color="warn">Delete List</button>
+      <button mat-button (click)="addItem($event)">Add Item</button>
+      <!--
+      <form>
+        <mat-form-field>
+          <input matInput placeholder="New Item" name="newItem" />
+        </mat-form-field>
+      </form>
+      -->
     </mat-card-content>
   </mat-card>
   </div>

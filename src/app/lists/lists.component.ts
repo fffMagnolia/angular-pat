@@ -6,8 +6,11 @@ import { ListsApiService } from '../services/apis/lists-api.service';
 import { ListService } from '../services/list.service';
 
 /* UI */
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheet } from '@angular/material';
 import { ListTitleEditorComponent } from '../list-title-editor/list-title-editor.component';
+
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfimationDialogComponent } from '../delete-confimation-dialog/delete-confimation-dialog.component';
 
 interface itemsJSON {
   id: number;
@@ -38,7 +41,8 @@ export class ListsComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private listsApiService: ListsApiService,
     private listService: ListService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -62,11 +66,50 @@ export class ListsComponent implements OnInit {
     let listTitleEditor = this.bottomSheet.open(ListTitleEditorComponent);
 
     //lists更新後、viewを強制的に再描画する
+    //BUG: キャンセル時にも再描画している
     listTitleEditor.afterDismissed().subscribe( _ => {
       this.listsApiService.getLists().subscribe(res => {
         this.lists = <listsJSON>res;
       })
       this.changeDetectorRef.detectChanges();
     });
+  }
+
+  /*
+   * List Delete時に確認用のダイアログを開く
+   * OKの場合は削除処理を行う
+   * 削除処理の後、listsを再描画する
+  */
+  openConfimationDialog(id, title) {
+    let deleteConfimationDialog = this.dialog.open(DeleteConfimationDialogComponent, { width: '320px', data: { id: id, title: title } });
+
+    deleteConfimationDialog.afterClosed().subscribe( _ => {
+      this.listsApiService.getLists().subscribe(res => {
+        this.lists = <listsJSON>res;
+      })
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  /*
+   * formから新規リストのタイトルを受け取る
+   * バック側でリスト作成後listsを更新
+   * lists更新完了後再描画する
+  */
+  addList(event) {
+    let newListTitle = event.target.value;
+    this.listsApiService.createList(newListTitle).subscribe( _ => {
+      this.listsApiService.getLists().subscribe(res => {
+        this.lists = <listsJSON>res;
+      })
+      this.changeDetectorRef.detectChanges();
+    })
+  }
+
+  /*
+   * ItemのCreate処理
+  */
+  addItem(event) {
+    console.log(event.target.value);
   }
 }
