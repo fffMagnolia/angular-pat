@@ -1,0 +1,11 @@
+<form>
+  <mat-form-field>
+    <input matInput placeholder="{{ data.nowItem }}" [(ngModel)]="nowItem" name="nowItem" />
+  </mat-form-field>
+  <mat-checkbox labelPosition="before" style="margin-left:10px;" [(ngModel)]="state" name="state" [ngSwitch]="state">
+      state: <span *ngSwitchCase="false">wait</span><span *ngSwitchCase="true">completed</span>
+  </mat-checkbox>
+</form>
+
+<button mat-stroked-button id="item-submit-button" (click)="updateItem()">Update</button>
+<button mat-stroked-button color="warn" (click)="deleteItem($event)" style="margin-left:25px;">Delete Item</button>

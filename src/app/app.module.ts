@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { ListsComponent } from './lists/lists.component';
 import { ListTitleEditorComponent } from './list-title-editor/list-title-editor.component';
 import { DeleteConfimationDialogComponent } from './delete-confimation-dialog/delete-confimation-dialog.component';
+import { ItemEditorComponent } from './item-editor/item-editor.component';
 
 /* UI Library */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 /* Angular Flex */
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -29,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppComponent,
     ListsComponent,
     ListTitleEditorComponent,
-    DeleteConfimationDialogComponent
+    DeleteConfimationDialogComponent,
+    ItemEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -44,11 +47,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule 
   ],
   entryComponents: [
     ListTitleEditorComponent, 
-    DeleteConfimationDialogComponent
+    DeleteConfimationDialogComponent,
+    ItemEditorComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

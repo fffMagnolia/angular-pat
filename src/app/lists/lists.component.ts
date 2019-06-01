@@ -13,6 +13,8 @@ import { ListTitleEditorComponent } from '../list-title-editor/list-title-editor
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfimationDialogComponent } from '../delete-confimation-dialog/delete-confimation-dialog.component';
 
+import { ItemEditorComponent } from '../item-editor/item-editor.component';
+
 interface itemsJSON {
   id: number;
   body: string;
@@ -51,6 +53,26 @@ export class ListsComponent implements OnInit {
     this.listsApiService.getLists().subscribe(res => {
       this.lists = <listsJSON>res;
     })
+  }
+
+  //================= リストのCRUD＋アイテムのR =======================
+
+  /*
+   * formから新規リストのタイトルを受け取る
+   * バック側でリスト作成後listsを更新
+   * lists更新完了後再描画する
+   * 注意：かな入力時のEnterで動作しないようにしている
+  */
+  addList(event) {
+    if(event.which === 13) {
+      let newListTitle = event.target.value;
+      this.listsApiService.createList(newListTitle).subscribe( _ => {
+        this.listsApiService.getLists().subscribe(res => {
+          this.lists = <listsJSON>res;
+        })
+        this.changeDetectorRef.detectChanges();
+      })
+    }
   }
 
   /*
@@ -93,33 +115,44 @@ export class ListsComponent implements OnInit {
     });
   }
 
-  /*
-   * formから新規リストのタイトルを受け取る
-   * バック側でリスト作成後listsを更新
-   * lists更新完了後再描画する
-  */
-  addList(event) {
-    let newListTitle = event.target.value;
-    this.listsApiService.createList(newListTitle).subscribe( _ => {
-      this.listsApiService.getLists().subscribe(res => {
-        this.lists = <listsJSON>res;
-      })
-      this.changeDetectorRef.detectChanges();
-    })
-  }
+  //================= アイテムのCUD =======================
 
   /*
    * formから新規アイテムを受け取る
    * バック側で更新完了後listsを再描画する
   */
-  addItem(listId, event) { 
-    let newItem = event.target.value;
-    this.itemsApiService.createItem(listId, newItem).subscribe( _ => {
+  addItem(listId, event) {
+    if(event.which === 13) {
+      let newItem = event.target.value;
+      this.itemsApiService.createItem(listId, newItem).subscribe( _ => {
+        this.listsApiService.getLists().subscribe(res => {
+          this.lists = <listsJSON>res;
+        })
+        this.changeDetectorRef.detectChanges();
+        //TODO:この辺で通知出したい
+      })
+    }
+  }
+
+  /*
+   * 編集用のBottomSheetを開く
+   * シート側でitemのbody,stateの変更or削除を行う
+   * 処理完了後listsを再描画する
+  */
+  openItemEditor(event) {
+    let id = event.option.value['id'];
+    let nowItem = event.option.value['nowItem'];
+    let state = event.option.value['state'];
+
+    let itemEditor = this.bottomSheet.open(ItemEditorComponent, { data: { id: id, nowItem: nowItem, state: state } });
+
+    itemEditor.afterDismissed().subscribe( _ => {
       this.listsApiService.getLists().subscribe(res => {
         this.lists = <listsJSON>res;
       })
-      this.changeDetectorRef.detectChanges();
-      //TODO:この辺で通知出したい
     })
+    this.changeDetectorRef.detectChanges();
+    //TODO:この辺で通知出したい
   }
 }
+

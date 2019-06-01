@@ -14,12 +14,11 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-selection-list role="list" (selectionChange)="editItemBody($event.option)">
+      <mat-selection-list role="list" (selectionChange)="openItemEditor($event)">
         <div *ngFor="let item of list['items']">
-          <!-- load直後はstateの状態によってDOMが変わる -->
-          <!-- selectedの値が変わる毎にstateも変更したい -->
+          <!-- stateの状態によってDOMが変わる -->
           <div [ngSwitch]="item['state']">
-            <mat-list-option role="listitem" [selected]="item.selected" [value]="item['id']">
+            <mat-list-option role="listitem" [value]="{ id: item['id'], nowItem: item['body'], state: item['state'] }">
               <!-- TODOが未完了の場合 -->
               <div *ngSwitchCase="0">{{ item['body'] }}</div>
               <!-- TODOが完了の場合 -->
