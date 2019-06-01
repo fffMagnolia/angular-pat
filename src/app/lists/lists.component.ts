@@ -4,6 +4,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 /* Service */
 import { ListsApiService } from '../services/apis/lists-api.service';
 import { ListService } from '../services/list.service';
+import { ItemsApiService } from '../services/apis/items-api.service';
 
 /* UI */
 import { MatBottomSheet } from '@angular/material';
@@ -42,7 +43,8 @@ export class ListsComponent implements OnInit {
     private listsApiService: ListsApiService,
     private listService: ListService,
     private bottomSheet: MatBottomSheet,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private itemsApiService: ItemsApiService
   ) { }
 
   ngOnInit() {
@@ -107,9 +109,17 @@ export class ListsComponent implements OnInit {
   }
 
   /*
-   * ItemのCreate処理
+   * formから新規アイテムを受け取る
+   * バック側で更新完了後listsを再描画する
   */
-  addItem(event) {
-    console.log(event.target.value);
+  addItem(listId, event) { 
+    let newItem = event.target.value;
+    this.itemsApiService.createItem(listId, newItem).subscribe( _ => {
+      this.listsApiService.getLists().subscribe(res => {
+        this.lists = <listsJSON>res;
+      })
+      this.changeDetectorRef.detectChanges();
+      //TODO:この辺で通知出したい
+    })
   }
 }

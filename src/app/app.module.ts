@@ -46,7 +46,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     MatDialogModule
   ],
-  entryComponents: [ListTitleEditorComponent, DeleteConfimationDialogComponent],
+  entryComponents: [
+    ListTitleEditorComponent, 
+    DeleteConfimationDialogComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

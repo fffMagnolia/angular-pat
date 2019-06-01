@@ -38,7 +38,5 @@ export class DeleteConfimationDialogComponent implements OnInit {
       this.dialogRef.close();
       event.preventDefault();
     })
-
-
   }
 }
