@@ -140,11 +140,12 @@ export class ListsComponent implements OnInit {
    * 処理完了後listsを再描画する
   */
   openItemEditor(event) {
-    let id = event.option.value['id'];
+    let listId = event.option.value['listId'];
+    let itemId = event.option.value['itemId'];
     let nowItem = event.option.value['nowItem'];
     let state = event.option.value['state'];
 
-    let itemEditor = this.bottomSheet.open(ItemEditorComponent, { data: { id: id, nowItem: nowItem, state: state } });
+    let itemEditor = this.bottomSheet.open(ItemEditorComponent, { data: { listId: listId, itemId: itemId, nowItem: nowItem, state: state } });
 
     itemEditor.afterDismissed().subscribe( _ => {
       this.listsApiService.getLists().subscribe(res => {

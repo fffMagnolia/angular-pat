@@ -2,3 +2,7 @@
   min-width: 340px;
   margin: 10px;
 }
+
+.completed-task {
+  color: gray;
+}

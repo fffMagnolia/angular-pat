@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+  <p>Are you delete sure?: <span class="target">{{ data.nowItem}}</span></p>
+</div>
+<div mat-dialog-actions>
+  <!-- cancelに初期フォーカスが当たっている -->
+  <button mat-stroked-button (click)="cancel()">Cancel</button>
+  <button mat-stroked-button class="ok-button" (click)="delete($event)">OK</button>
+</div>

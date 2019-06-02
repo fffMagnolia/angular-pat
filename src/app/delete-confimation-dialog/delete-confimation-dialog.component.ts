@@ -4,6 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 /* Service */
 import { ListsApiService } from '../services/apis/lists-api.service';
+import { ItemsApiService } from '../services/apis/items-api.service';
 
 interface DialogData {
   id: number;
@@ -19,6 +20,7 @@ export class DeleteConfimationDialogComponent implements OnInit {
 
   constructor(
     private listsApiService: ListsApiService,
+    private itemsApiService: ItemsApiService,
     private dialogRef: MatDialogRef<DeleteConfimationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
@@ -35,8 +37,10 @@ export class DeleteConfimationDialogComponent implements OnInit {
   */
   delete(event, id) {
     this.listsApiService.deleteList(id).subscribe( _ => {
-      this.dialogRef.close();
-      event.preventDefault();
+      this.itemsApiService.deleteItems(id).subscribe( _ => {
+        this.dialogRef.close();
+        event.preventDefault();
+      })
     })
   }
 }

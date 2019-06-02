@@ -18,11 +18,11 @@
         <div *ngFor="let item of list['items']">
           <!-- stateの状態によってDOMが変わる -->
           <div [ngSwitch]="item['state']">
-            <mat-list-option role="listitem" [value]="{ id: item['id'], nowItem: item['body'], state: item['state'] }">
+            <mat-list-option role="listitem" [value]="{ listId: list['id'], itemId: item['id'], nowItem: item['body'], state: item['state'] }">
               <!-- TODOが未完了の場合 -->
               <div *ngSwitchCase="0">{{ item['body'] }}</div>
               <!-- TODOが完了の場合 -->
-              <div *ngSwitchCase="1"><s>{{ item['body'] }}</s></div>
+              <div *ngSwitchCase="1"><s class="completed-task">{{ item['body'] }}</s></div>
             </mat-list-option>
           </div>
         </div>

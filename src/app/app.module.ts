@@ -11,6 +11,8 @@ import { ListsComponent } from './lists/lists.component';
 import { ListTitleEditorComponent } from './list-title-editor/list-title-editor.component';
 import { DeleteConfimationDialogComponent } from './delete-confimation-dialog/delete-confimation-dialog.component';
 import { ItemEditorComponent } from './item-editor/item-editor.component';
+//TODO:DeleteConfimationDialogComponentと統合したい
+import { ItemDeleteConfimationDialogComponent } from './item-delete-confimation-dialog/item-delete-confimation-dialog.component';
 
 /* UI Library */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +34,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ListsComponent,
     ListTitleEditorComponent,
     DeleteConfimationDialogComponent,
-    ItemEditorComponent
+    ItemEditorComponent,
+    ItemDeleteConfimationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   entryComponents: [
     ListTitleEditorComponent, 
     DeleteConfimationDialogComponent,
-    ItemEditorComponent
+    ItemEditorComponent,
+    ItemDeleteConfimationDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
