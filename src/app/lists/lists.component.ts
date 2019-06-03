@@ -71,6 +71,7 @@ export class ListsComponent implements OnInit {
           this.lists = <listsJSON>res;
         })
         this.changeDetectorRef.detectChanges();
+        event.preventDefault();
       })
     }
   }
