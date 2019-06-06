@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 560bd10c980d8b554bd9225ebcc6aa38bd032c11 Magnolia <magnolia1925pa@gmail.com> 1558431202 +0900	branch: Created from master
+560bd10c980d8b554bd9225ebcc6aa38bd032c11 ae455f108dcc78dd20cc44631fa2fa6c7dd110c8 Magnolia <magnolia1925pa@gmail.com> 1558511279 +0900	commit: ・プロキシの設定。/アクセス時にExpressにもリクエストが飛ぶようになった
+ae455f108dcc78dd20cc44631fa2fa6c7dd110c8 7ef866fef2581eb045f43d74c1f6ec3092916f47 Magnolia <magnolia1925pa@gmail.com> 1559052501 +0900	commit: ・バックエンドからのデータ取得用にlists-api.servceを作成
+7ef866fef2581eb045f43d74c1f6ec3092916f47 6c26efbc35b7426627702bafd1a4ebf5f09a2bb2 Magnolia <magnolia1925pa@gmail.com> 1559144775 +0900	commit: List titleのupdateを実装wq
+6c26efbc35b7426627702bafd1a4ebf5f09a2bb2 5feeba7940eab430c6e412a8f227db11d2ad1435 Magnolia <magnolia1925pa@gmail.com> 1559179705 +0900	commit (amend): List titleのupdateを実装
+5feeba7940eab430c6e412a8f227db11d2ad1435 619f9af3285a3181c1ac1770d1ce24f49e597a56 Magnolia <magnolia1925pa@gmail.com> 1559304977 +0900	commit: ・リストのCRUDを実装
+619f9af3285a3181c1ac1770d1ce24f49e597a56 1c3bd6f676e5fc414ce704a89426e18148ef819c Magnolia <magnolia1925pa@gmail.com> 1559361993 +0900	commit: item create機能の実装
+1c3bd6f676e5fc414ce704a89426e18148ef819c 905b15f4a9f3d9c4a571866889032e4ff2b79b34 Magnolia <magnolia1925pa@gmail.com> 1559407475 +0900	commit: ・keydown.enterの判定にかな入力時の確定操作が含まれるバグを修正
+905b15f4a9f3d9c4a571866889032e4ff2b79b34 55e38c44041f4649e36f7705052c765e26bf63e7 Magnolia <magnolia1925pa@gmail.com> 1559465616 +0900	commit: 全体のCRUDを実装
+55e38c44041f4649e36f7705052c765e26bf63e7 1d441dd5a69cb1298b60d488e7e169bdba7b11dd Magnolia <magnolia1925pa@gmail.com> 1559544904 +0900	commit: 細かなバグを修正

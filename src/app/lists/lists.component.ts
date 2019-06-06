@@ -3,8 +3,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 /* Service */
 import { ListsApiService } from '../services/apis/lists-api.service';
-import { ListService } from '../services/list.service';
 import { ItemsApiService } from '../services/apis/items-api.service';
+import { ListService } from '../services/list.service';
 
 /* UI */
 import { MatBottomSheet } from '@angular/material';
@@ -88,7 +88,7 @@ export class ListsComponent implements OnInit {
     this.listService.setTitle(nowTitle);
     this.listService.setId(id);
 
-    let listTitleEditor = this.bottomSheet.open(ListTitleEditorComponent);
+    let listTitleEditor = this.bottomSheet.open(ListTitleEditorComponent, { data: { id: id, title: nowTitle } });
 
     //lists更新後、viewを強制的に再描画する
     //BUG: キャンセル時にも再描画している

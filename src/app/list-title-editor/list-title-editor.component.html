@@ -1,6 +1,6 @@
 <form>
   <mat-form-field>
-    <input matInput placeholder="{{ nowTitle }}" [(ngModel)]="newTitle" name="newTitle"/>
+    <input matInput placeholder="{{ this.data.title }}" [(ngModel)]="newTitle" name="newTitle"/>
   </mat-form-field>
-  <button mat-stroked-button id="title-submit-button" (click)="updateTitle($event)">Submit</button>
+  <button mat-stroked-button id="title-submit-button" (click)="updateTitle($event)">Update</button>
 </form>

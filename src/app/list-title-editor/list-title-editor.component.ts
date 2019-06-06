@@ -1,18 +1,15 @@
 /* General */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 /* UI */
-import { MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 
 /* Service */
-import { ListService } from '../services/list.service';
 import { ListsApiService } from '../services/apis/lists-api.service';
 
-interface listJSON {
+interface BottomSheetData {
   id: number;
   title: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 @Component({
@@ -23,33 +20,24 @@ interface listJSON {
 export class ListTitleEditorComponent implements OnInit {
 
   /*
-   * @nowTitle: フォーム表示
    * @newTitle: update用。データバインディングしている
-   * @id: update用
   */
-  nowTitle: string;
   newTitle: string;
-  id: number;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<ListTitleEditorComponent>,
-    private listService: ListService,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: BottomSheetData,
     private listsApiService: ListsApiService
   ) { }
 
-  ngOnInit() {
-    this.nowTitle = this.listService.getTitle();
-    this.id = this.listService.getId();
-  }
+  ngOnInit() {}
 
   /* 
-   * send input value at list-api-service
    * @id: target list ID
-   * TODO: list modelの更新をしたい
   */
   updateTitle(event) {
     //バック側に飛ばす。view更新用にserviceにも新しいタイトルを渡す
-    this.listsApiService.updateListTitle(this.id, this.newTitle)
+    this.listsApiService.updateListTitle(this.data.id, this.newTitle)
       .subscribe( _ => {
         //後処理。dismiss後listsに処理を引き継ぐ。
         this.bottomSheetRef.dismiss();
