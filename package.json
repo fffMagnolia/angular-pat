@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "start": "node pat-api/bin/www",
+    "start": "node bin/www",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
