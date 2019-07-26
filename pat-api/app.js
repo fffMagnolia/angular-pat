@@ -18,7 +18,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + "/dist/front/"));
 
 app.use('/', indexRouter);
 app.use('/lists', listsRouter);
@@ -40,9 +41,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//駄目元で描いてみる
-var distDir = __dirname + "/dist/front/";
-app.use(express.static(distDir));
 
 //DB connect test
 /*
