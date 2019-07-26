@@ -41,7 +41,7 @@ app.use(function(err, req, res, next) {
 });
 
 //駄目元で描いてみる
-var distDir = __dirname + "/dist/";
+var distDir = __dirname + "/dist/front/";
 app.use(express.static(distDir));
 
 //DB connect test
