@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const lists = sequelize.define('lists', {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     title: DataTypes.STRING,
     createdAt: DataTypes.DATE,
