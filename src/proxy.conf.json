@@ -1,0 +1,7 @@
+{
+  "/": {
+    "target": "https://pat-api.herokuapp.com/",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
